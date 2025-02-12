@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    이름 <input type="text" id="name" name="name" /><br />
+    성별 <br />
+    <input type="radio" name="gender" value="man" /> 남자
+    <input type="radio" name="gender" value="woman" /> 여자
+    <br />
+    생년월일
+    <select name="birth-year" id="birth-year">
+      <option disabled selected>출생 연도</option>
+    </select>
+    <select name="birth-month" id="birth-month">
+      <option disabled selected>월</option>
+    </select>
+    <select name="birth-day" id="birth-day">
+      <option disabled selected>일</option>
+    </select>
+    <br />
+    관심사<br />
+    <input type="checkbox" name="interest" value="trip" /> 여행
+    <input type="checkbox" name="interest" value="fashion" /> 패션
+    <input type="checkbox" name="interest" value="food" /> 음식 <br /><br />
+    <button type="button" onclick="onClick()">회원가입</button>
+  </body>
+  <script src="/js/axiosGet.js"></script>
+</html>
