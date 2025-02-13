@@ -82,6 +82,6 @@ const onClick = () => {
     url: "/axiosget",
     params: data,
   }).then((res) => {
-    console.log(data);
+    console.log(res);
   });
 };
