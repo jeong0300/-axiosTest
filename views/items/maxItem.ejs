@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>가장 비싼 아이템</title>
+  </head>
+  <body>
+    <h1>가장 비싼 아이템 페이지</h1>
+    <br />
+    <% items.forEach(item => { %>
+    <h1><%= item.name %></h1>
+    <p><%= item.price %>원</p>
+    <% }) %>
+    <a href="/items">뒤로가기</a>
+  </body>
+</html>
