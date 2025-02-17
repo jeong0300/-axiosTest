@@ -102,21 +102,96 @@ const getActorsAll = () => {
 
 //  2. 남자 배우 리스트 (이름,나이,커리어) 테이블 형식으로
 const getManActor = () => {
-  return careers.filter((actor) => {
-    actor.careers.some((career) => career.gender === "남자");
-  });
+  return careers.filter((actor) =>
+    actor.careers.some((career) => career.gender === "남자")
+  );
 };
 
 //  3. 여자 배우 리스트 (이름,나이,커리어) 테이블 형식으로
 const getWomanActor = () => {
-  return careers.filter((actor) => {
-    actor.careers.some((carrer) => carrer.gender === "여자");
-  });
+  return careers.filter((actor) =>
+    actor.careers.some((career) => career.gender === "여자")
+  );
 };
 
 //  4. 같은 드라마 || 같은 영화 || 같은 뮤지컬 나온 배우들 (카테고리, 제목, 배우 이름, 역할 ) 테이블
+const getSameTitles = () => {
+  // 각 카테고리별로 배우들 그룹화
+  const movieGroup = {}; // 영화 카테고리
+  const dramaGroup = {}; // 드라마 카테고리
+  const musicalGroup = {}; // 뮤지컬 카테고리
+
+  // 모든 배우 순회
+  careers.forEach((actor) => {
+    // 배우의 경력(career)을 순회
+    actor.careers.forEach((career) => {
+      const { categor, title, role } = career; // 카테고리, 제목, 역할 추출
+
+      // 카테고리에 맞는 그룹으로 분류
+      if (categor === "movie") {
+        // 영화 그룹에 추가
+        if (!movieGroup[title]) {
+          movieGroup[title] = []; // 해당 제목의 그룹이 없다면 새로 생성
+        }
+        movieGroup[title].push({
+          userName: actor.userName, // 배우 이름
+          role, // 역할
+        });
+      } else if (categor === "drama") {
+        // 드라마 그룹에 추가
+        if (!dramaGroup[title]) {
+          dramaGroup[title] = []; // 해당 제목의 그룹이 없다면 새로 생성
+        }
+        dramaGroup[title].push({
+          userName: actor.userName, // 배우 이름
+          role, // 역할
+        });
+      } else if (categor === "musical") {
+        // 뮤지컬 그룹에 추가
+        if (!musicalGroup[title]) {
+          musicalGroup[title] = []; // 해당 제목의 그룹이 없다면 새로 생성
+        }
+        musicalGroup[title].push({
+          userName: actor.userName, // 배우 이름
+          role, // 역할
+        });
+      }
+    });
+  });
+
+  // 카테고리별로 그룹화된 데이터를 반환
+  return {
+    movie: movieGroup, // 영화 그룹
+    drama: dramaGroup, // 드라마 그룹
+    musical: musicalGroup, // 뮤지컬 그룹
+  };
+};
 
 //  5. 카테고리 영화만 따로 만들어서 (카테고리 이름, 제목, 배우 이름, 역할) 테이블
-//  6. 카테고리 드라마만 따로 만들어서 (카테고리 이름, 제목, 배우 이름, 역할) 테이블
+const getMovie = () => {
+  return careers
+    .map((actor) => ({
+      ...actor,
+      careers: actor.careers.filter((career) => career.categor === "movie"),
+    }))
+    .filter((actor) => actor.careers.length > 0);
+};
 
-module.exports = { getActorsAll, getManActor, getWomanActor };
+//  6. 카테고리 드라마만 따로 만들어서 (카테고리 이름, 제목, 배우 이름, 역할) 테이블
+const getDrama = () => {
+  return careers
+    .map((actor) => ({
+      ...actor,
+      careers: actor.careers.filter((career) => career.categor === "drama"),
+    }))
+    .filter((actor) => actor.careers.length > 0);
+};
+
+module.exports = {
+  getActorsAll,
+  getManActor,
+  getWomanActor,
+  getSameTitles,
+  getMovie,
+  getDrama,
+};

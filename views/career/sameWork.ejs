@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/static/css/manActor.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>같은 작품 출연 배우</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>같은 작품 출연 배우</h1>
+
+      <div class="category-buttons">
+        <a href="/career/manActors" class="btn">남자 배우</a>
+        <a href="/career/womanActor" class="btn">여자 배우</a>
+        <a href="/career/movie" class="btn">영화</a>
+        <a href="/career/drama" class="btn">드라마</a>
+        <a href="/career/sameWork" class="btn">같은 작품 출연 배우</a>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>카테고리</th>
+            <th>제목</th>
+            <th>배우 이름</th>
+            <th>역할</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% Object.keys(sameWork).forEach(function(category) { %>
+          <!-- 카테고리 순회 -->
+          <% const group = sameWork[category]; %>
+          <!-- 카테고리의 그룹 -->
+          <% Object.keys(group).forEach(function(title) { %>
+          <!-- 제목 순회 -->
+          <% const actors = group[title]; %>
+          <!-- 제목에 해당하는 배우들 -->
+          <% actors.forEach(function(actor, index) { %>
+          <!-- 배우 순회 -->
+          <tr>
+            <% if (index === 0) { %>
+            <td rowspan="<%= actors.length %>">
+              <%= category === 'movie' ? '영화' : category === 'drama' ?
+              '드라마' : '뮤지컬' %>
+            </td>
+            <td rowspan="<%= actors.length %>"><%= title %></td>
+            <% } %>
+            <td><%= actor.userName %></td>
+            <td><%= actor.role %></td>
+          </tr>
+          <% }); %> <% }); %> <% }); %>
+        </tbody>
+      </table>
+      <br />
+      <a href="/career" class="btn">리스트로 돌아가기</a>
+    </div>
+  </body>
+</html>
