@@ -117,53 +117,48 @@ const getWomanActor = () => {
 //  4. 같은 드라마 || 같은 영화 || 같은 뮤지컬 나온 배우들 (카테고리, 제목, 배우 이름, 역할 ) 테이블
 const getSameTitles = () => {
   // 각 카테고리별로 배우들 그룹화
-  const movieGroup = {}; // 영화 카테고리
-  const dramaGroup = {}; // 드라마 카테고리
-  const musicalGroup = {}; // 뮤지컬 카테고리
+  const movieGroup = {};
+  const dramaGroup = {};
+  const musicalGroup = {};
 
   // 모든 배우 순회
   careers.forEach((actor) => {
-    // 배우의 경력(career)을 순회
     actor.careers.forEach((career) => {
-      const { categor, title, role } = career; // 카테고리, 제목, 역할 추출
+      const { categor, title, role } = career;
 
       // 카테고리에 맞는 그룹으로 분류
       if (categor === "movie") {
-        // 영화 그룹에 추가
         if (!movieGroup[title]) {
           movieGroup[title] = []; // 해당 제목의 그룹이 없다면 새로 생성
         }
         movieGroup[title].push({
-          userName: actor.userName, // 배우 이름
-          role, // 역할
+          userName: actor.userName,
+          role,
         });
       } else if (categor === "drama") {
-        // 드라마 그룹에 추가
         if (!dramaGroup[title]) {
-          dramaGroup[title] = []; // 해당 제목의 그룹이 없다면 새로 생성
+          dramaGroup[title] = [];
         }
         dramaGroup[title].push({
-          userName: actor.userName, // 배우 이름
-          role, // 역할
+          userName: actor.userName,
+          role,
         });
       } else if (categor === "musical") {
-        // 뮤지컬 그룹에 추가
         if (!musicalGroup[title]) {
-          musicalGroup[title] = []; // 해당 제목의 그룹이 없다면 새로 생성
+          musicalGroup[title] = [];
         }
         musicalGroup[title].push({
-          userName: actor.userName, // 배우 이름
-          role, // 역할
+          userName: actor.userName,
+          role,
         });
       }
     });
   });
 
-  // 카테고리별로 그룹화된 데이터를 반환
   return {
-    movie: movieGroup, // 영화 그룹
-    drama: dramaGroup, // 드라마 그룹
-    musical: musicalGroup, // 뮤지컬 그룹
+    movie: movieGroup,
+    drama: dramaGroup,
+    musical: musicalGroup,
   };
 };
 

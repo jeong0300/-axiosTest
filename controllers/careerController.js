@@ -47,6 +47,7 @@ const getDrama = (req, res) => {
   }
 };
 
+// 모든 카테고리 가져오기
 const getSameTitle = (req, res) => {
   const sameWork = careerModel.getSameTitles();
   res.render("career/sameWork", { sameWork });
