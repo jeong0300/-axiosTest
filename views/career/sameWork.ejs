@@ -28,7 +28,7 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Object.keys : 키만 배열로 가져오기 -->
+          <!-- Object.keys : 키만 배열로 -->
           <% Object.keys(sameWork).forEach((category) => { %>
           <!-- 카테고리 순회 -->
           <% const group = sameWork[category]; %>
@@ -41,7 +41,7 @@
           <!-- 배우 순회 -->
           <tr>
             <% if (index === 0) { %>
-            <td>
+            <td rowspan="<%= actors.length %>">
               <%= category === 'movie' ? '영화' : category === 'drama' ?
               '드라마' : '뮤지컬' %>
             </td>
