@@ -12,7 +12,7 @@ const getAllUsers = () => {
 // id로 해당하는 유저 찾기
 const getUserById = (id) => {
   return users.find((user) => user.id === parseInt(id));
-};
+}; 
 
 // 해당 파일에서 만든 함수 내보내기 (모듈화, 밖에서도 사용 가능) -> userController 에 보냄
 module.exports = { getAllUsers, getUserById };
